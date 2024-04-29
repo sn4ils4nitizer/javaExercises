@@ -1,0 +1,48 @@
+package numbersGame;
+
+import java.util.Random;
+import java.util.Scanner;
+import java.util.Timer;
+
+public class NumbersGame {
+    public static void main(String args[]) {
+    System.out.println("Welcome to the number guessing game. \n Try to gess a number between 1-20. \n Type your                    answer below:");
+
+    //Create new randomizer and generate integer between 1-20
+    Random randomizer = new Random();
+    int theNumber = randomizer.nextInt(20) + 1;
+    //new scanner to gather user input
+    Scanner scanner = new Scanner(System.in);
+
+    //The loop runs 10 times giving the user 10 attempts to guess the correct number
+    for(int i=0;i<=9;i++) {
+
+    String answer = scanner.nextLine();
+    //string input is converted to integer, if the input cannot be converted
+    //the user is shown an error message and user has to restart the game
+        try { 
+            Integer.parseInt(answer);
+            } 
+        catch (NumberFormatException e) { 
+            System.out.println("ERROR. PLEASE RESTART THE PROGRAM AND MAKE SURE YOU ENTER INTEGERS ONLY"); 
+            } 
+
+        //If the user input is equal to the randomly generated number the win message is displayed
+        if (Integer.parseInt(answer)== theNumber) {
+            System.out.println("WINNER!!! WINNER!!! CHICKEN DINNER!!!");
+            break;
+            }
+         //If the user input does not equal the random number and user has tried less than 10 times 
+        //the user will be shown a message and asked to try again
+        if (Integer.parseInt(answer)!= theNumber && i<9) {
+            System.out.println("Your entry is incorrect! \n Try again!");
+            }
+        //If the user input does not equal the random number and it is the user's 10th try
+        // the user will be show a "you lose" message
+        if (Integer.parseInt(answer) != theNumber && i==9) {
+            System.out.println("YOU LOSE!");
+            }
+        }
+    }
+}
+

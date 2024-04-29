@@ -1,0 +1,53 @@
+
+import java.util.Random;
+import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList; 
+
+public class CoinToss {
+    //variable to store results
+    public static String tossResult;
+    
+    //function to toss the coin and set value of tossResult to "head" or "tails"
+    public static void coinToss() {
+        Random toss = new Random();
+        int tossRandom = toss.nextInt(2) + 1;
+        if (tossRandom == 1){tossResult = "heads";}
+        else tossResult = "tails";
+        }
+
+    //function to obtain results from the tossResult variable
+    public String getResult(){
+        return tossResult;
+        }
+
+    public static void main(String[] args) {
+    //initiate new instances of Scanner and CoinToss classes 
+    CoinToss coinToss = new CoinToss();
+    Scanner scanner = new Scanner(System.in);
+    //Set up lists to store results in
+    List<String> headsList = new ArrayList<>(); 
+    List<String> tailsList = new ArrayList<>(); 
+
+    System.out.println("How many times would you like to toss the coin?");
+    int tossNumber = scanner.nextInt();
+    //loop to toss the coin using the user input 
+    for (int i = 0; i < tossNumber; i++){
+        //coinToss function generates a number 
+        coinToss();
+        //getResult function retrieves the string value from tossResult 
+        //variable and adds it to the appropriate list
+        if(coinToss.getResult().equals("heads")){
+            headsList.add("heads");}
+        else tailsList.add("tails");
+        }
+    //Print the total counts of heads and tails
+    System.out.println("Total heads: " + headsList.size());
+    System.out.println("Total tails: " + tailsList.size());
+
+    //toss victory conditions 
+    if(headsList.size() == tailsList.size()) {System.out.println("IT IS A TIE!");}
+    if(headsList.size() > tailsList.size()) {System.out.println("HEADS WON!!!");}
+    if(headsList.size() < tailsList.size()) {System.out.println("TAILS WON!!!");}
+    }
+}

@@ -1,0 +1,25 @@
+
+import java.util.Scanner;
+
+public class secondsMinutesHours {
+    public static void main(String[] args) {
+
+    Scanner scanner = new Scanner(System.in);
+
+    System.out.println("Please enter the number of seconds to convert to number of minutes, hours, or days:");
+    int numberOfSeconds = scanner.nextInt();
+
+    if (numberOfSeconds < 60) {
+         System.out.println(numberOfSeconds + " seconds.");
+        }
+        else if (numberOfSeconds >= 60 && numberOfSeconds < 3600){
+        System.out.println("There are " + (numberOfSeconds/60) + " minutes in " + numberOfSeconds + " seconds.");
+        }
+        else if (numberOfSeconds >= 3600 && numberOfSeconds < 86400 ) {
+        System.out.println("There are " + (numberOfSeconds/3600) + " hours in " + numberOfSeconds + " seconds.");
+        }
+        else {
+        System.out.println("There are " + (numberOfSeconds/86400) + " days in " + numberOfSeconds + " seconds.");
+        }
+    }
+}

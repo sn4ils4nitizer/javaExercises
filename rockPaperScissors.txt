@@ -1,0 +1,116 @@
+
+
+package rockPaperScissors;
+
+import java.util.*;
+import javax.swing.JOptionPane;
+import java.io.FileWriter;
+import java.io.IOException;
+
+public class RockPaperScissors{
+    //variables storing computer and player choices
+    private String opponentPlay;
+    private String playerPlay;
+    //lists to store win and loss results, separate lists are easier get a count of items from
+    List<String> wins = new ArrayList<>();
+    List<String> losses = new ArrayList<>();
+    
+    //function that determines what computer will, random number is generated and each number assigns
+    //choise of rock, paper, of scissors to opponentPlay variable
+    public void opponentSetPlay() {
+        Random rand = new Random();
+        int rng = rand.nextInt(3) + 1;
+        if (rng == 1) {
+            opponentPlay = "rock";
+            }
+        if (rng == 2) {
+            opponentPlay = "paper";
+            }
+        if (rng == 3) {
+            opponentPlay = "scissors";
+            }
+    }
+    
+    //getter function to retrieve value from opponentPlay variable
+    String getOpponentPlay() {
+        return opponentPlay;
+        }
+
+    //function where player can type in their choice for the round
+    void playerSetPlay() {
+        playerPlay = JOptionPane.showInputDialog("Rock paper scissors:");
+        }
+
+    //function to retrive value of the player choice from playerPlay variable
+    String getPlayerPlay() {
+        return playerPlay;
+        }
+
+    public static void main(String args[]) {
+        //new instance of RockPaperScissors class
+        RockPaperScissors rPS = new RockPaperScissors();
+        //loop to make the game go for ten rounds
+        for(int i = 0; i < 10; i++) {
+        //computer and opponent play is generated
+        rPS.opponentSetPlay();
+        rPS.playerSetPlay();
+        
+        //boolean variable to determine if there is a draw
+        boolean draw;
+        //while loop to continue the round until a draw is successfully resolved
+        while(draw = true) {
+        //win cases 
+        if (rPS.getOpponentPlay().equals("rock") && rPS.getPlayerPlay().equals("paper")) {
+            JOptionPane.showMessageDialog(null, "Computer: " + rPS.getOpponentPlay() + "\nYou: " + rPS.getPlayerPlay() + "\n\nYOU WON!"); 
+            rPS.wins.add("win");
+            break;
+            }
+        if (rPS.getOpponentPlay().equals("paper") && rPS.getPlayerPlay().equals("scissors")) {
+            JOptionPane.showMessageDialog(null, "Computer: " + rPS.getOpponentPlay() + "\nYou: " + rPS.getPlayerPlay() + "\n\nYOU WON!");
+            rPS.wins.add("win");
+            break;
+            }
+        if (rPS.getOpponentPlay().equals("scissors") && rPS.getPlayerPlay().equals("rock")) {
+            JOptionPane.showMessageDialog(null, "Computer: " + rPS.getOpponentPlay() + "\nYou: " + rPS.getPlayerPlay() +"\n\nYOU WON!");
+            rPS.wins.add("win");
+            break;
+            }
+        //loss cases
+        if (rPS.getOpponentPlay().equals("paper") && rPS.getPlayerPlay().equals("rock")) {
+            JOptionPane.showMessageDialog(null, "Computer: " + rPS.getOpponentPlay() + "\nYou: " + rPS.getPlayerPlay() + "\n\nYOU LOST!"); 
+            rPS.losses.add("loss");
+            break;
+            }
+        if (rPS.getOpponentPlay().equals("scissors") && rPS.getPlayerPlay().equals("paper")) {
+            JOptionPane.showMessageDialog(null, "Computer: " + rPS.getOpponentPlay() + "\nYou: " + rPS.getPlayerPlay() + "\n\nYOU LOST!");
+            rPS.losses.add("loss");
+            break;
+            }
+        if (rPS.getOpponentPlay().equals("rock") && rPS.getPlayerPlay().equals("scissors")) {
+            JOptionPane.showMessageDialog(null, "Computer: " + rPS.getOpponentPlay() + "\nYou: " + rPS.getPlayerPlay() + "\n\nYOU LOST!");
+            rPS.losses.add("loss");
+            break;
+            }
+        //draw case, restarts the while loop, computer randomizes another play and player must enter their new choice
+        else 
+            JOptionPane.showMessageDialog(null, "Computer: " + rPS.getOpponentPlay() + "\nYou: " + rPS.getPlayerPlay() + "\n\nIt's a draw! Retry!");
+            draw = true;
+            rPS.opponentSetPlay();
+            rPS.playerSetPlay();
+            }
+        }
+    //message displayed to the user showing the game results
+    JOptionPane.showMessageDialog(null, "You won: " + rPS.wins.size() + " matches!" + "\n\nYou lost: " + rPS.losses.size() + " matches!");
+    //results are saved to text file, exception is shown if the file cannot be created or saved
+    try{
+        FileWriter gameResults = new FileWriter("GameResults.txt");
+        gameResults.write("You have won " + rPS.wins.size() + " matches.");
+        gameResults.write("\n\nYou have lost " + rPS.losses.size() + " matches.");
+        gameResults.close();
+        JOptionPane.showMessageDialog(null, "Game results have been successfully saved to a file!");
+        }
+    catch(IOException e) {
+        JOptionPane.showMessageDialog(null, "An error has occured. File cannot be saved.");
+        }
+    }
+} 

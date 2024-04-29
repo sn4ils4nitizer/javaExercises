@@ -1,0 +1,160 @@
+
+
+package personaldata;
+
+import java.util.Random;
+import java.io.FileWriter;
+import java.io.IOException; 
+import java.util.Scanner;
+
+class Main{
+    public static void main(String[] args) {
+        //User info to provide customer data
+        Scanner scanner = new Scanner(System.in);
+        //new instance of customerData class
+        CustomerData customer1 = new CustomerData();
+
+        //Questionnaire for the user
+        System.out.println("Please provdie your first name:");
+        String firstName = scanner.nextLine();
+        System.out.println("Please provdie your last name:");
+        String lastName = scanner.nextLine();
+        customer1.setName(firstName, lastName);
+
+        System.out.println("Please provide your street address:");
+        String address = scanner.nextLine();
+        System.out.println("What city do you reside in?");
+        String city = scanner.nextLine();
+        System.out.println("What state do you reside in?");
+        String state = scanner.nextLine();
+        System.out.println("Please provide your zip code:");
+        String zipCode = scanner.nextLine();
+        customer1.setAddress(address, city, state, zipCode);
+        System.out.println("What is your phone number?");
+        String phoneNumber = scanner.nextLine();
+        customer1.setPhoneNumber(phoneNumber);
+        customer1.generateCustomerNumber();
+        System.out.println("Do you agree to be on our mailing list? (y/n)");
+        String mailingList = scanner.nextLine();
+        customer1.setMailingList(mailingList);
+    
+        System.out.println("Would you like to verify the information you provided? (y/n)");
+        String decision = scanner.nextLine();
+        
+        //Uses getter methods to print information to the console
+        if(decision.equals("y")){
+            System.out.println("\n\n\nYou provided the following information:");
+            System.out.println("Name: "); customer1.getName();
+            System.out.println("Address: "); customer1.getAddress();
+            System.out.println("Phone number: "); customer1.getPhoneNumber();
+            System.out.println("Customer number: "); customer1.getCustomerNumber();
+            System.out.println("Mailing list: "); customer1.getMailingList();
+            }
+        else System.out.println("Thank you for your interest!");
+        
+        System.out.println("Would you like to save the information you provided? (y/n)");
+        String save = scanner.nextLine();
+        //New instance of filewriter to save string returns from a set of 
+        //getter methods that return Strings so they can
+        //saved in a file name "customerData"
+        if(save.equals("y")){
+            try {
+                FileWriter myWriter = new FileWriter("customerData.txt");
+                myWriter.write("Name: " + customer1.getName2() + "\n");
+                myWriter.write("Address: " + customer1.getAddress2() + "\n");
+                myWriter.write("Phone number: " + customer1.getPhoneNumber2() + "\n");
+                myWriter.write("Customer number: " + customer1.getCustomerNumber2() + "\n");
+                myWriter.write("Mailing list: " + customer1.getMailingList2() + "\n");
+                myWriter.close();
+                //User is notified via console when the file is saved successfully
+                System.out.println("File saved succesfully.");
+                } 
+            //User is notified if an error has occurred when creating or writing to the file
+            catch (IOException e) {
+                    System.out.println("An error occurred.");
+                    }
+        }
+    }
+}
+
+class PersonData {
+    private String firstName;
+    private String lastName;
+    private String address;
+    private String city;
+    private String state;
+    private String zipCode;
+    private String phoneNumber;
+
+    public void setName(String firstName, String lastName){
+        this.firstName = firstName;
+        this.lastName = lastName;
+        }
+
+    public void setAddress(String streetName, String cityName, String stateName, String zip){
+        address = streetName;
+        city = cityName;
+        state = stateName;
+        zipCode = zip;
+        }
+
+    public void setPhoneNumber(String phoneDigits){
+        phoneNumber = phoneDigits;
+        }
+    
+    public void getName(){
+        System.out.println(firstName + " " + lastName);
+        }
+    
+    public void getAddress(){
+        System.out.println(address + ", " + city + " " + state + ", " + zipCode);
+        } 
+
+    public void getPhoneNumber(){
+        System.out.println(phoneNumber);
+        }
+
+    public String getName2() {
+        return firstName + " " + lastName;
+        }
+
+    public String getAddress2() {
+        return address + ", " + city + " " + state + ", " + zipCode;
+        }
+
+    public String getPhoneNumber2() {
+        return phoneNumber;
+        }
+}
+
+class CustomerData extends PersonData{
+    private int customerNumber;
+    private boolean mailingList;
+
+    public void generateCustomerNumber(){
+        Random random = new Random();
+        customerNumber = random.nextInt(100);
+        }
+
+    public void setMailingList(String permission){
+        if(permission.equals("y")) {mailingList = true;}
+        else mailingList = false;
+        }
+
+    public void getCustomerNumber(){
+        System.out.println(customerNumber);
+        } 
+
+    public void getMailingList(){
+        System.out.println(mailingList);
+        } 
+
+    public int getCustomerNumber2() {
+        return customerNumber;
+        }
+
+    public boolean getMailingList2() {
+        return mailingList;
+        }
+
+}

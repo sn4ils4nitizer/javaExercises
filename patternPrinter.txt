@@ -1,0 +1,36 @@
+
+class PatternPrinter {
+    public static void main(String[] args) {
+    
+    int smallColumns = 10;
+    //outer loop prints large columns
+    for (int i = smallColumns; i >= 1; i--) {
+        // prints increasing number of starts to replace the spaces
+        for (int j = 0; j <= smallColumns - i; j++) {
+            System.out.print("*");
+            }
+        // prints decreasing number of spaces
+        for (int j = 1; j < i; j++) {
+            System.out.print(" ");
+            }
+        //acts as a spacer between first and second column
+        System.out.print(" ");
+        // prints one star less with each iteration for the first column
+        for (int j = 1; j <= i; j++) {
+            System.out.print("*");
+            }
+        // prints increasing number of spaces to replace the stars 
+        for (int j = 0; j <= smallColumns - i; j++) {
+            System.out.print(" ");
+            }
+        //acts as a spacer between second and third column
+        System.out.print(" ");
+        // prints increasing number of starts to replace the spaces
+        for (int j = 0; j <= smallColumns - i; j++) {
+            System.out.print("*");
+            }
+        // printing new line for each row
+        System.out.println();
+        }
+    }
+}

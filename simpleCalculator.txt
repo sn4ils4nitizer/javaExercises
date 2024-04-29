@@ -1,0 +1,47 @@
+
+import java.util.Scanner;
+
+class MathFunctions {
+    //addition method
+    public static void add(int num1, int num2){
+        int result = num1 + num2;
+        System.out.println("Sum of given numbers is: " + result);
+        }
+    
+    //subtraction method    
+    public static void subtract(int num1, int num2){
+        int result = num1 - num2;
+        System.out.println("Difference of given numbers is: " + result);
+        }
+    
+    //multiplication method    
+    public static int multiplication(int num1, int num2){
+        int result = num1 * num2;
+        return result;
+        }
+    
+    //division method    
+    public static int division(int num1, int num2){
+        int result = num1 / num2;
+        return result;
+        }
+    
+    //remainder method    
+    public static int remainder(int num1, int num2){
+        int result = num1 % num2;
+        return result;
+        }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Please provide your first number:");
+        int num1 = scanner.nextInt();
+        System.out.println("Please provide your second number:");
+        int num2 = scanner.nextInt();
+        add(num1, num2);
+        subtract(num1, num2);
+        System.out.println("The product of given numbers is: " + multiplication(num1, num2));
+        System.out.println("The dividend of given numbers is: " + division(num1, num2));
+        System.out.println("The remainder of given numbers is: " + remainder(num1, num2));
+    }
+}

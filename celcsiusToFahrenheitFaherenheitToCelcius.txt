@@ -1,0 +1,22 @@
+import java.util.Scanner;
+import java.text.DecimalFormat;
+
+class temperatureConverter {
+    public static void main(String[] args) {
+    
+    Scanner userInput = new Scanner(System.in);
+    //formats output to use two numbers after decimal
+    DecimalFormat df = new DecimalFormat("0.00");
+    System.out.println("Please provide a number:");
+    int t = userInput.nextInt();
+    System.out.println("\nNumber \t \t \t\tCtoF \t \t \t \t FtoC");
+    
+    for (int i=t; i<=(t+20); i++){
+        //F = C * (9/5) + 32.
+        double degreesFahrenheit = ((((double) i * 9)/5) + 32);
+        //C = (F - 32) * 5/9
+        double degreesCelcius = ((((double) i - 32)*5)/9);
+        System.out.print("\n" + i + "\t \t \t \t \t" + df.format(degreesFahrenheit) + "\t \t \t \t \t" + df.format               (degreesCelcius));
+        }
+    }
+}
